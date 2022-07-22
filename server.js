@@ -1,4 +1,5 @@
 // DEPENDENCIES
+const { urlencoded } = require("express");
 const express = require("express");
 const path = require('path');
 const db = require("./db/db.json")
@@ -9,7 +10,8 @@ const app = express();
 const PORT = 3000;
 
 // Middleware
-
+app.use(express.json());
+app.use(express.urlencoded({extended: true}));
 
 // Notes GET route
 
@@ -27,3 +29,6 @@ const PORT = 3000;
 
 
 // Port listener
+app.listen(PORT, () => {
+  console.log("Server running on PORT " + PORT);
+})
