@@ -1,9 +1,12 @@
 // DEPENDENCIES
-
+const express = require("express");
+const path = require('path');
+const db = require("./db/db.json")
 
 
 // Initiate express
-
+const app = express();
+const PORT = 3000;
 
 // Middleware
 
