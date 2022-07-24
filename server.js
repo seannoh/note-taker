@@ -47,7 +47,7 @@ app.post("/api/notes", (req, res) => {
         throw err;
       } else {
         console.log("Successfully saved");
-        res.send("Note successfully saved");
+        res.send(newNote);
       }
     });
   });
@@ -56,6 +56,32 @@ app.post("/api/notes", (req, res) => {
 
 
 // Notes API DELETE route
+app.delete("/api/notes/:id", (req, res) => {
+  const id = req.params.id;
+
+  fs.readFile("./db/db.json", (error, data) => {
+    if(error) {
+      throw error;
+    }
+
+    const parsedData = JSON.parse(data);
+    console.log(parsedData);
+    const newData = parsedData.filter((note) => {return note.id !== id;});
+    console.log(newData);
+    const newDB = JSON.stringify(newData);
+
+    fs.writeFile("./db/db.json", newDB, (err) => {
+      if(err) {
+        console.error(err);
+        throw err;
+      } else {
+        console.log("Successfully deleted");
+        res.send("Successfully deleted");
+      }
+    });
+  });
+
+})
 
 
 // Notes GET route
