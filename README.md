@@ -20,16 +20,16 @@ This application allows the user to create, save, and delete simple text notes. 
 * [Credits](#credits)
 * [License](#license)
 * [Contributing](#contributing)
-* [Tests](#tests)
-
 
 ## Installation
 Upload all files or fork this repository to a server with a Node.js runtime environment. If running locally, run `npm -i` from the root directory to install dependencies for this app. Then, run `npm start` to start the app on localhost:3000. This application can be demoed at the link below, deployed via heroku.
 
-## Usage 
 Link to deployed page: https://peaceful-tundra-19298.herokuapp.com/
+## Usage 
 
 From the homepage, click "Get Started" to enter the app. On the left are the saved notes which you can click to view. In the top right, click the "+" button to create a new note. After you're finished typing, press the save button in the top right to save the note to persistent storage. Additionally, you can click the red trash can icon next to each note on the right to delete the specified note.
+
+![preview](./assets/preview.gif)
 
 ## Credits
 This application was built with the support of the resources and staff of the UCB Full Stack Full Time Coding Bootcamp Summer 2022. 
@@ -69,5 +69,5 @@ This project isn't currently acccepting contributions.
 
 ## Questions
 - View my Github [profile](https://github.com/seannoh)
-- Contact me at my [email](https://github.com/seanoh@ucsb.edu)
+- Contact me at my [email](mailto:seanoh@ucsb.edu)
 
