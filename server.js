@@ -1,7 +1,9 @@
 // DEPENDENCIES
 const express = require("express");
 const path = require('path');
-const db = require("./db/db.json")
+const db = require("./db/db.json");
+const {v4: uuidv4} = require("uuid");
+const fs = require("fs");
 
 
 // Initiate express
@@ -20,6 +22,37 @@ app.get("/api/notes", (req, res) => {
 })
 
 // Notes API POST route
+app.post("/api/notes", (req, res) => {
+
+  fs.readFile("./db/db.json", (error, data) => {
+    if(error) {
+      throw error;
+    }
+
+    const {title, text} = req.body;
+    const id = uuidv4();
+    const newNote = {
+      title: title,
+      text: text,
+      id: id
+    };
+
+    const parsedData = JSON.parse(data);
+    parsedData.push(newNote);
+    const newDB = JSON.stringify(parsedData);
+
+    fs.writeFile("./db/db.json", newDB, (err) => {
+      if(err) {
+        console.error(err);
+        throw err;
+      } else {
+        console.log("Successfully saved");
+        res.send("Note successfully saved");
+      }
+    });
+  });
+
+});
 
 
 // Notes API DELETE route
