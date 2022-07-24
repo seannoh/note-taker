@@ -20,11 +20,14 @@ app.get("/api/notes", (req, res) => {
 
 // Notes API POST route
 app.post("/api/notes", (req, res) => {
+
+  // read in contents of db.json
   fs.readFile("./db/db.json", (error, data) => {
     if (error) {
       throw error;
     }
 
+    // store contents of new note to an object, using uuidv4 to generate a new unique id
     const { title, text } = req.body;
     const id = uuidv4();
     const newNote = {
@@ -33,10 +36,12 @@ app.post("/api/notes", (req, res) => {
       id: id,
     };
 
+    // parse the saved data, add the new note, and convert to string
     const parsedData = JSON.parse(data);
     parsedData.push(newNote);
     const newDB = JSON.stringify(parsedData);
 
+    // write the new data to db.json
     fs.writeFile("./db/db.json", newDB, (err) => {
       if (err) {
         throw err;
@@ -49,19 +54,23 @@ app.post("/api/notes", (req, res) => {
 
 // Notes API DELETE route
 app.delete("/api/notes/:id", (req, res) => {
+  // get id of note to be deleted from route parameter
   const id = req.params.id;
 
+  // read in saved notes from db.json
   fs.readFile("./db/db.json", (error, data) => {
     if (error) {
       throw error;
     }
 
+    // parse saved notes, filter out the specified note with the correct id, and convert to string
     const parsedData = JSON.parse(data);
     const newData = parsedData.filter((note) => {
       return note.id !== id;
     });
     const newDB = JSON.stringify(newData);
 
+    // write the new data to db.json
     fs.writeFile("./db/db.json", newDB, (err) => {
       if (err) {
         throw err;
